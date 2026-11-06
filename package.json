@@ -1,5 +1,5 @@
 {
-  "name": "express-api-template-2",
+  "name": "express-admin-api-template-2",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.ts",
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parkdigy/express-api-template-2.git"
+    "url": "git+https://github.com/parkdigy/express-admin-api-template-2.git"
   },
   "eslintConfig": {},
   "dependencies": {

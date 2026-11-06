@@ -1,4 +1,4 @@
-# express-api-template-2
+# express-admin-api-template-2
 
 ## 개발 및 빌드
 

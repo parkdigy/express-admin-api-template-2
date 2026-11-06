@@ -16,4 +16,4 @@
 - Jest/Watchman 접근 오류가 있으면 `npm test -- --runInBand --watchman=false`로 별도 확인하고 기본 검증 결과와 구분한다. 외부 DB·서비스 연동 검증 여부를 명시한다.
 - `npm run build`는 `dist`와 Watchman 상태를 변경한다. `make:publish:*`, `publish:*`, `reset:gitignore`, PM2 명령은 명시적 요청 없이 실행하지 않는다.
 
-두 계층 이상을 함께 바꾸거나 트랜잭션·스케줄러를 다룰 때는 `.agents/skills/express-api-template-2-orchestrator/SKILL.md`를 사용한다.
+두 계층 이상을 함께 바꾸거나 트랜잭션·스케줄러를 다룰 때는 `.agents/skills/express-admin-api-template-2-orchestrator/SKILL.md`를 사용한다.
