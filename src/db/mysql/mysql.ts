@@ -8,7 +8,7 @@ url += `${encodeURIComponent(process.env.DB_HOST)}:${encodeURIComponent(process.
 url += encodeURIComponent(process.env.DB_DATABASE);
 
 export const mysql = drizzleMySql({
-  url: url,
+  url,
   schema,
   getTimestamp: () => util.dateTime.format(now()),
 });
