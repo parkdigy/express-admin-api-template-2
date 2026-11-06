@@ -6,7 +6,7 @@
 - 요청은 `src/routes` → `src/controllers` → `src/db/mysql/query`를 따른다. 라우트별 `Controller`, `ApiController`와 인증·업로드 미들웨어의 순서를 확인한다.
 - 컨트롤러 래퍼는 자동 트랜잭션을 만들지 않는다. 원자성이 필요하면 `await db.trans(...)` 안의 작업을 모두 await하고 롤백할 오류를 콜백 밖으로 전파한다.
 - DB는 `@pdg/drizzle-mysql`을 사용한다. 스키마·쿼리 변경 시 `src/db/mysql/schema`, `src/db/mysql/query`, `src/db/db.ts`와 관련 export를 확인한다. 환경변수 변경 시 `.env.example`과 `src/@types/process.d.ts`도 확인한다.
-- `dist`, `@dev`, `@logs`를 직접 편집하지 않는다. 두 계층 이상을 함께 바꾸거나 트랜잭션·스케줄러를 다룰 때는 `.agents/skills/express-api-template-2-orchestrator/SKILL.md`를 사용한다.
+- `dist`, `@dev`, `@logs`를 직접 편집하지 않는다. 두 계층 이상을 함께 바꾸거나 트랜잭션·스케줄러를 다룰 때는 `.agents/skills/express-admin-api-template-2-orchestrator`를 사용한다.
 
 ## 검증과 안전
 
