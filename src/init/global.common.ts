@@ -7,8 +7,8 @@ import _param from '../common/param';
 import _mail from '../common/mail';
 import _excel from '../common/excel';
 import _jwt from '../common/jwt';
-
 import _db from '../db';
+import _api from '../common/api';
 
 declare global {
   var aes256: typeof _aes256;
@@ -20,8 +20,8 @@ declare global {
   var mail: typeof _mail;
   var excel: typeof _excel;
   var jwt: typeof _jwt;
-
   var db: typeof _db;
+  var api: typeof _api;
 }
 
 globalThis.aes256 = _aes256;
@@ -33,5 +33,5 @@ globalThis.param = _param;
 globalThis.mail = _mail;
 globalThis.excel = _excel;
 globalThis.jwt = _jwt;
-
 globalThis.db = _db;
+globalThis.api = _api;

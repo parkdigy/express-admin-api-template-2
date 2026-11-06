@@ -1,5 +1,5 @@
 ---
-name: express-template-2-orchestrator
+name: express-api-template-2-orchestrator
 description: 라우트·컨트롤러·DB처럼 두 계층 이상을 함께 변경하거나 트랜잭션·스케줄러 위험을 검토할 때 사용한다.
 ---
 

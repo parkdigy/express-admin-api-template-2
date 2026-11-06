@@ -13,7 +13,7 @@ class User extends MySqlQuery<'user'> {
    * 로그인을 위한 정보
    * ******************************************************************************************************************/
   infoForSignIn(email: string) {
-    return this.find(['id', 'password', 'email'], this.eq({ email }));
+    return this.find(['id', 'password', 'email', 'status', 'login_fail_count'], this.eq({ email }));
   }
 
   /********************************************************************************************************************

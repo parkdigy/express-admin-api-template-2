@@ -1,14 +1,13 @@
 import express from 'express';
-import { Logger, LocalChecker } from '@middlewares';
+import { Logger } from '@middlewares';
+import Ping from './Ping';
 import Deploy from './Deploy';
-import Test from './Test';
+import Auth from './Auth';
 
 const router = express.Router();
 
 router.use('/deploy', Logger(), Deploy);
-
-if (env.isLocal) {
-  router.use('/test', LocalChecker, Test);
-}
+router.use('/ping', Ping);
+router.use('/auth', Auth);
 
 export default router;

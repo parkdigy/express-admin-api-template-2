@@ -11,7 +11,7 @@ import helmet from 'helmet';
 import https from 'https';
 import { exec } from 'child_process';
 import path from 'path';
-import { RemoteIpAddressSetter } from '@middlewares';
+import { Cors, RemoteIpAddressSetter } from '@middlewares';
 import fs from 'fs';
 import http from 'http';
 import axios from 'axios';
@@ -96,7 +96,7 @@ if (
 }
 
 let realRoutes = routes;
-app.use('/', RemoteIpAddressSetter, function (req, res, next) {
+app.use('/', Cors, RemoteIpAddressSetter, function (req, res, next) {
   realRoutes(req, res, next);
 });
 

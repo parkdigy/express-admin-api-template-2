@@ -1,5 +1,5 @@
 {
-  "name": "express-template-2",
+  "name": "express-api-template-2",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.ts",
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/parkdigy/express-template-2.git"
+    "url": "git+https://github.com/parkdigy/express-api-template-2.git"
   },
   "eslintConfig": {},
   "dependencies": {
@@ -70,6 +70,7 @@
     "@rspack/core": "^2.2.9",
     "@types/base-64": "^1.0.2",
     "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/flat": "^5.0.5",
@@ -90,6 +91,7 @@
     "cookie-parser": "^1.4.7",
     "cookie-session": "^2.1.1",
     "core-js": "^3.50.0",
+    "cors": "^2.8.6",
     "cross-env": "^10.1.0",
     "dayjs": "^1.11.23",
     "dotenv": "^17.4.2",

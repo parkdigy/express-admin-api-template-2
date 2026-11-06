@@ -9,7 +9,7 @@
 
 import { type MyAuthController, type MyController } from '@types';
 import { type RequestHandler } from 'express';
-import { MulterRemover } from './Multer';
+import { MulterOriginalNameChanger, MulterRemover } from './Multer';
 import Controller from './Controller';
 
 export default function (
@@ -17,5 +17,5 @@ export default function (
   controller: MyController | MyAuthController,
   sessionAuthCheck = false
 ) {
-  return Controller(controller, sessionAuthCheck, [multer], [MulterRemover]);
+  return Controller(controller, sessionAuthCheck, [multer, MulterOriginalNameChanger], [MulterRemover]);
 }
