@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": false,
+    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@common_aes256": ["src/common/aes256"],
+      "@common_aws": ["src/common/aws"],
+      "@common_big": ["src/common/Big"],
+      "@common_crypt": ["src/common/crypt"],
+      "@common_env": ["src/common/env"],
+      "@common_excel": ["src/common/excel"],
+      "@common_jwt": ["src/common/jwt"],
+      "@common_logging": ["src/common/logging"],
+      "@common_mail": ["src/common/mail"],
+      "@common_param": ["src/common/param"],
+      "@common_text": ["src/common/text"],
+      "@common_util": ["src/common/util"],
+      "@const": ["src/constants"],
+      "@controllers": ["src/controllers"],
+      "@middlewares": ["src/middlewares"],
+      "@types": ["src/@types"],
+      "@db": ["src/db"]
+    },
+    "types": ["jest", "node"],
+    "typeRoots": ["node_modules/@types", "src/@types"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts"]
+}

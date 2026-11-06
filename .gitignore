@@ -1,0 +1,73 @@
+# production (배포 시 주석 처리)
+/dist
+
+# publish
+# 배포 시 publish/development, publish/staging, publish/production Branch 생성하고 모두 주석 해제
+#PUB#/.agents
+#PUB#/_workspace
+#PUB#/src
+#PUB#/test
+#PUB#.env.example
+#PUB#.git-commit.js
+#PUB#.git-merge.js
+#PUB#.gitmodules
+#PUB#.prettierignore
+#PUB#.prettierrc.cjs
+#PUB#.publish.js
+#PUB#.publish_make.js
+#PUB#AGENTS.md
+#PUB#eslint.config.mjs
+#PUB#jest.config.ts
+#PUB#README.md
+#PUB#tsconfig.json
+#PUB#tsconfig.test.json
+#PUB#rspack.config.js
+#PUB#/scripts
+
+# development
+/@dev
+
+# upload
+/@uploads
+
+# 로그
+/@logs
+
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+
+
+# npm
+node_modules
+package-lock.json
+*.log
+*.gz
+
+# IntelliJ
+.idea
+
+# Coveralls
+coverage
+
+# Benchmarking
+benchmarks/graphs
+
+# dotenv
+.env
+.env.development
+.env.staging
+.env.production
+
+# eslint cache
+.eslintcache
