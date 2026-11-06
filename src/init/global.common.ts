@@ -7,6 +7,7 @@ import _param from '../common/param';
 import _mail from '../common/mail';
 import _excel from '../common/excel';
 import _jwt from '../common/jwt';
+import _menu from '../common/menu';
 import _db from '../db';
 import _api from '../common/api';
 
@@ -20,6 +21,7 @@ declare global {
   var mail: typeof _mail;
   var excel: typeof _excel;
   var jwt: typeof _jwt;
+  var menu: typeof _menu;
   var db: typeof _db;
   var api: typeof _api;
 }
@@ -33,5 +35,6 @@ globalThis.param = _param;
 globalThis.mail = _mail;
 globalThis.excel = _excel;
 globalThis.jwt = _jwt;
+globalThis.menu = _menu;
 globalThis.db = _db;
 globalThis.api = _api;

@@ -1,8 +1,8 @@
 export * from './@common';
-export * from './User';
+export * from './Admin';
 
-import * as User from './User';
+import * as Admin from './Admin';
 
 export default {
-  ...User,
+  ...Admin,
 };

@@ -10,3 +10,4 @@ export * from './mail';
 export * from './aws';
 export * from './excel';
 export * from './util';
+export * from './menu';

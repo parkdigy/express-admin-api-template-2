@@ -32,6 +32,9 @@ declare namespace NodeJS {
     PM2_RELOAD_HOUR: string;
     PM2_RELOAD_MINUTE: string;
 
+    // API 시작/종료 로그 표시 여부
+    API_START_FINISH_LOG_SHOW: EnvBoolean;
+
     // 접속 로그 기록 여부
     LOGGING: EnvBoolean;
 

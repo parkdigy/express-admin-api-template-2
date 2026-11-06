@@ -10,23 +10,19 @@
 import Starter from './Starter';
 import Finisher from './Finisher';
 import Logger from './Logger';
+import ApiCallPermissionChecker from './ApiCallPermissionChecker';
 import { type MyAuthController, type MyController } from '@types';
 import { type NextFunction, type RequestHandler } from 'express';
 
 export default function (
   controller: MyController | MyAuthController,
+  callPermissionCheck = false,
   logging = true,
   loggingData = false,
   afterStartMiddlewares: RequestHandler[] = [],
   beforeFinishMiddlewares: RequestHandler[] = []
 ) {
-  const handlers = [];
-
-  if (logging) {
-    handlers.push(Logger(loggingData));
-  }
-
-  handlers.push(
+  const handlers: any[] = [
     Starter,
     ...afterStartMiddlewares,
     async (req: MyRequest | MyAuthRequest, res: MyResponse, next: NextFunction) => {
@@ -39,14 +35,23 @@ export default function (
       try {
         await controller(req as any, res);
       } catch (err) {
+        ll(err);
         await handleException(err as Error);
       }
 
       next();
     },
     ...beforeFinishMiddlewares,
-    Finisher
-  );
+    Finisher,
+  ];
+
+  if (logging) {
+    handlers.unshift(Logger(loggingData));
+  }
+
+  if (callPermissionCheck) {
+    handlers.unshift(ApiCallPermissionChecker);
+  }
 
   return handlers;
 }

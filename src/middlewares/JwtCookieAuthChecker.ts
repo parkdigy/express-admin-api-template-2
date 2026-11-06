@@ -12,7 +12,7 @@ export default async function (req: MyRequest, res: MyResponse, next: NextFuncti
   try {
     const { userId, expireDays } = jwt.verifyAccessToken(req);
     if (userId != null) {
-      const user = await db.q.user.infoForSession(userId);
+      const user = await db.q.adminUser.infoForSession(userId);
       if (user) {
         req.$$user = user;
         jwt.saveAccessToken(req, res, userId, expireDays);

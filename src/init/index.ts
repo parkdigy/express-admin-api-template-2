@@ -15,3 +15,5 @@ import '../@types';
 import './global.types';
 import './global.compare';
 import './global.common';
+
+import './global.admin';

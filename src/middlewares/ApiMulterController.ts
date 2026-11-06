@@ -15,8 +15,16 @@ import ApiController from './ApiController';
 export default function (
   multer: RequestHandler,
   controller: MyController | MyAuthController,
+  callPermissionCheck = false,
   logging = true,
   loggingData = false
 ) {
-  return ApiController(controller, logging, loggingData, [multer, MulterOriginalNameChanger], [MulterRemover]);
+  return ApiController(
+    controller,
+    callPermissionCheck,
+    logging,
+    loggingData,
+    [multer, MulterOriginalNameChanger],
+    [MulterRemover]
+  );
 }

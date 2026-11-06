@@ -16,11 +16,13 @@ import ApiJwtCookieAuthChecker from './ApiJwtCookieAuthChecker';
 export default function (
   multer: RequestHandler,
   controller: MyController | MyAuthController,
+  callPermissionCheck = false,
   logging = true,
   loggingData = false
 ) {
   return ApiController(
     controller,
+    callPermissionCheck,
     logging,
     loggingData,
     [multer, ApiJwtCookieAuthChecker, MulterOriginalNameChanger],
