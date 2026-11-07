@@ -155,7 +155,7 @@ export default {
 
     await db.trans(async () => {
       // 사용자 정보 수정
-      const updateData = db.q.adminUser.updateValues({});
+      const updateData = db.q.adminUser.editValues({});
       if (name !== userInfo.name) updateData.name = name;
       if (tel !== userInfo.tel) updateData.tel = tel;
       if (userInfo.must_password_change && tel !== userInfo.tel) {

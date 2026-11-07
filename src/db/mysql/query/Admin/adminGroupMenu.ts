@@ -21,14 +21,14 @@ class AdminGroupMenu extends MySqlQuery<'adminGroupMenu'> {
     for (const admin_menu_id of Object.keys(menus)) {
       const menuRoles = menus[admin_menu_id];
 
-      const addValue = this.insertValues({
+      const addValue = this.addValues({
         admin_group_id,
         admin_menu_id,
         read: false,
         write: false,
         export: false,
       });
-      const editValue = this.updateValues({});
+      const editValue = this.editValues({});
 
       for (const role of Object.keys(menuRoles)) {
         if (!contains(['read', 'write', 'export'], role)) continue;

@@ -241,7 +241,7 @@ export default {
 
     if (info.is_super_admin_menu !== is_super_admin_menu) {
       // 기존 SUPER 권한과 다를 경우에만 수정
-      const editData = db.q.adminMenu.updateValues({ is_super_admin_menu });
+      const editData = db.q.adminMenu.editValues({ is_super_admin_menu });
       if (is_super_admin_menu) {
         editData.is_all_user_menu = false;
       }
@@ -268,7 +268,7 @@ export default {
 
     if (info.is_all_user_menu !== is_all_user_menu) {
       // 기존 ALL 권한과 다를 경우에만 수정
-      const editData = db.q.adminMenu.updateValues({ is_all_user_menu });
+      const editData = db.q.adminMenu.editValues({ is_all_user_menu });
       if (is_all_user_menu) {
         editData.is_super_admin_menu = false;
       }
