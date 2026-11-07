@@ -7,6 +7,6 @@ export const user = mysqlTable('user', {
   password: varchar({ length: 500 }).notNull(),
   login_fail_count: int().notNull().default(0).insertBlocked(),
   status: mysqlEnum(UserStatus.getList()).notNull().default(UserStatus.On).$type<UserStatus>(),
-  create_date: datetime({ mode: 'string' }).notNull().createdAt(),
-  update_date: datetime({ mode: 'string' }).notNull().updatedAt(),
+  create_date: datetime().notNull().createdAt(),
+  update_date: datetime().notNull().updatedAt(),
 });
