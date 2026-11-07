@@ -33,8 +33,8 @@ class AdminPrivacyAccessLog extends MySqlQuery<'adminPrivacyAccessLog'> {
       .innerJoin(au, db.eq(au.id, al.admin_user_id))
       .where(
         db.and(al, {
-          gte: { create_date: util.dateTime.format(search_date_from) },
-          lte: { create_date: util.dateTime.format(search_date_to) },
+          gte: { create_date: search_date_from },
+          lte: { create_date: search_date_to },
           eq: { type, admin_user_id },
         })
       )

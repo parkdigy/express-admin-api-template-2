@@ -44,8 +44,8 @@ class AdminUserAccessLog extends MySqlQuery<'adminUserAccessLog'> {
       .innerJoin(k, db.eq(k.id, l.admin_user_access_key_id))
       .where(
         db.and(
-          db.gte(l.create_date, util.dateTime.format(util.dateTime.beginOfDay(search_date_from))),
-          db.lte(l.create_date, util.dateTime.format(util.dateTime.endOfDay(search_date_to))),
+          db.gte(l.create_date, util.dateTime.beginOfDay(search_date_from)),
+          db.lte(l.create_date, util.dateTime.endOfDay(search_date_to)),
           db.eq(k, { type }),
           notEmpty(keyword)
             ? keyword_option === 'user_id'

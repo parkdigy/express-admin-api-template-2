@@ -43,8 +43,8 @@ class AdminUserLoginLog extends MySqlQuery<'adminUserLoginLog'> {
       .innerJoin(au, db.eq(au.id, aull.admin_user_id))
       .where(
         db.and(
-          db.gte(aull.create_date, formatDate(util.dateTime.beginOfDay(login_date_from))),
-          db.lte(aull.create_date, formatDate(util.dateTime.endOfDay(login_date_to))),
+          db.gte(aull.create_date, util.dateTime.beginOfDay(login_date_from)),
+          db.lte(aull.create_date, util.dateTime.endOfDay(login_date_to)),
           !is_super_admin ? db.eq(au.id, admin_user_id) : undefined,
           notEmpty(keyword)
             ? db.or(
