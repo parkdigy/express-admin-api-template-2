@@ -10,7 +10,7 @@ url += encodeURIComponent(process.env.DB_DATABASE);
 export const mysql = drizzleMySql({
   url,
   schema,
-  getTimestamp: () => util.dateTime.format(now()),
+  getTimestamp: () => now(),
 });
 
 export default mysql;
