@@ -7,5 +7,5 @@ export const adminUserLoginLog = mysqlTable('admin_user_login_log', {
   ip_address: varchar({ length: 20 }).notNull(),
   ip_country: varchar({ length: 50 }).notNull(),
   ip_city: varchar({ length: 50 }).notNull(),
-  create_date: datetime({ mode: 'string' }).notNull().createdAt(),
+  create_date: datetime().notNull().createdAt(),
 });

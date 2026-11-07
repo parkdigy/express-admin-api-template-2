@@ -11,6 +11,6 @@ export const adminUser = mysqlTable('admin_user', {
   is_lock: boolean().default(false).notNull().insertBlocked(),
   login_fail_count: int().default(0).notNull().insertBlocked(),
   remember_token: varchar({ length: 100 }).insertBlocked(),
-  create_date: datetime({ mode: 'string' }).notNull().createdAt(),
-  update_date: datetime({ mode: 'string' }).notNull().updatedAt(),
+  create_date: datetime().notNull().createdAt(),
+  update_date: datetime().notNull().updatedAt(),
 });

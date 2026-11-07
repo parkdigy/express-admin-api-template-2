@@ -9,6 +9,6 @@ export const adminUserActivity = mysqlTable('admin_user_activity', {
   activity_text_1: text(),
   activity_text_2: text(),
   memo: text(),
-  create_date: datetime({ mode: 'string' }).notNull().createdAt(),
-  update_date: datetime({ mode: 'string' }).notNull().updatedAt(),
+  create_date: datetime().notNull().createdAt(),
+  update_date: datetime().notNull().updatedAt(),
 });

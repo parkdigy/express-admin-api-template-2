@@ -7,5 +7,5 @@ export const adminPrivacyAccessLog = mysqlTable('admin_privacy_access_log', {
   type: varchar({ length: 50 }).notNull().$type<AdminPrivacyAccessLogType>(),
   reason: varchar({ length: 100 }).notNull(),
   parent_id: bigint({ mode: 'number' }).notNull(),
-  create_date: datetime({ mode: 'string' }).notNull().createdAt(),
+  create_date: datetime().notNull().createdAt(),
 });
