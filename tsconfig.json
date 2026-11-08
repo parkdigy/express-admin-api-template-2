@@ -32,7 +32,10 @@
       "@controllers": ["src/controllers"],
       "@middlewares": ["src/middlewares"],
       "@types": ["src/@types"],
-      "@db": ["src/db"]
+      "@db": ["src/db"],
+      "@db_mysql": ["src/db/mysql"],
+      "@db_mysql_query": ["src/db/mysql_query"],
+      "@db_mysql_schema": ["src/db/mysql_schema"]
     },
     "types": ["jest", "node"],
     "typeRoots": ["node_modules/@types", "src/@types"]
