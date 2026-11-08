@@ -67,3 +67,6 @@ class AdminUserLoginLog extends MySqlQuery<'adminUserLoginLog'> {
 }
 
 export const adminUserLoginLog = new AdminUserLoginLog();
+
+export type AdminUserLoginLog$AddValues = ReturnType<typeof adminUserLoginLog.addValues>;
+export type AdminUserLoginLog$EditValues = ReturnType<typeof adminUserLoginLog.editValues>;

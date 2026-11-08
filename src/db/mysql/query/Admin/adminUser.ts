@@ -175,3 +175,6 @@ class AdminUser extends MySqlQuery<'adminUser'> {
 }
 
 export const adminUser = new AdminUser();
+
+export type AdminUser$AddValues = ReturnType<typeof adminUser.addValues>;
+export type AdminUser$EditValues = ReturnType<typeof adminUser.editValues>;
