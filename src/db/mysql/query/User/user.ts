@@ -25,3 +25,6 @@ class User extends MySqlQuery<'user'> {
 }
 
 export const user = new User();
+
+export type User$AddValues = ReturnType<typeof user.addValues>;
+export type User$EditValues = ReturnType<typeof user.editValues>;
