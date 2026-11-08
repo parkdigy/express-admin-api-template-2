@@ -31,5 +31,7 @@ class AdminGroup extends MySqlQuery<'adminGroup'> {
 
 export const adminGroup = new AdminGroup();
 
+export type TAdminGroup = typeof adminGroup.t.$inferSelect;
+
 export type AdminGroup$AddValues = ReturnType<typeof adminGroup.addValues>;
 export type AdminGroup$EditValues = ReturnType<typeof adminGroup.editValues>;

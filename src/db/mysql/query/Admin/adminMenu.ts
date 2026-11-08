@@ -135,5 +135,7 @@ class AdminMenu extends MySqlQuery<'adminMenu'> {
 
 export const adminMenu = new AdminMenu();
 
+export type TAdminMenu = typeof adminMenu.t.$inferSelect;
+
 export type AdminMenu$AddValues = ReturnType<typeof adminMenu.addValues>;
 export type AdminMenu$EditValues = ReturnType<typeof adminMenu.editValues>;

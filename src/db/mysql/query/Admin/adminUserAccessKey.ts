@@ -23,5 +23,7 @@ class AdminUserAccessKey extends MySqlQuery<'adminUserAccessKey'> {
 
 export const adminUserAccessKey = new AdminUserAccessKey();
 
+export type TAdminUserAccessKey = typeof adminUserAccessKey.t.$inferSelect;
+
 export type AdminUserAccessKey$AddValues = ReturnType<typeof adminUserAccessKey.addValues>;
 export type AdminUserAccessKey$EditValues = ReturnType<typeof adminUserAccessKey.editValues>;

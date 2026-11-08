@@ -64,5 +64,7 @@ class AdminUserActivity extends MySqlQuery<'adminUserActivity'> {
 
 export const adminUserActivity = new AdminUserActivity();
 
+export type TAdminUserActivity = typeof adminUserActivity.t.$inferSelect;
+
 export type AdminUserActivity$AddValues = ReturnType<typeof adminUserActivity.addValues>;
 export type AdminUserActivity$EditValues = ReturnType<typeof adminUserActivity.editValues>;

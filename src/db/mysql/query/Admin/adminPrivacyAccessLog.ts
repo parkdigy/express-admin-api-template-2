@@ -44,5 +44,7 @@ class AdminPrivacyAccessLog extends MySqlQuery<'adminPrivacyAccessLog'> {
 
 export const adminPrivacyAccessLog = new AdminPrivacyAccessLog();
 
+export type TAdminPrivacyAccessLog = typeof adminPrivacyAccessLog.t.$inferSelect;
+
 export type AdminPrivacyAccessLog$AddValues = ReturnType<typeof adminPrivacyAccessLog.addValues>;
 export type AdminPrivacyAccessLog$EditValues = ReturnType<typeof adminPrivacyAccessLog.editValues>;

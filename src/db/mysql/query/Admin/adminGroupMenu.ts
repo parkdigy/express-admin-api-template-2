@@ -50,5 +50,7 @@ class AdminGroupMenu extends MySqlQuery<'adminGroupMenu'> {
 
 export const adminGroupMenu = new AdminGroupMenu();
 
+export type TAdminGroupMenu = typeof adminGroupMenu.t.$inferSelect;
+
 export type AdminGroupMenu$AddValues = ReturnType<typeof adminGroupMenu.addValues>;
 export type AdminGroupMenu$EditValues = ReturnType<typeof adminGroupMenu.editValues>;

@@ -50,5 +50,7 @@ class AdminGroupUser extends MySqlQuery<'adminGroupUser'> {
 
 export const adminGroupUser = new AdminGroupUser();
 
+export type TAdminGroupUser = typeof adminGroupUser.t.$inferSelect;
+
 export type AdminGroupUser$AddValues = ReturnType<typeof adminGroupUser.addValues>;
 export type AdminGroupUser$EditValues = ReturnType<typeof adminGroupUser.editValues>;
