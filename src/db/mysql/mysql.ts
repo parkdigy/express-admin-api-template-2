@@ -2,15 +2,15 @@ import { drizzleMySql } from '@pdg/drizzle-mysql';
 import schema from './schema';
 import 'dotenv/config';
 
-let url = `${encodeURIComponent(process.env.DB_CONNECTION)}://`;
-url += `${encodeURIComponent(process.env.DB_USERNAME)}:${encodeURIComponent(process.env.DB_PASSWORD)}@`;
-url += `${encodeURIComponent(process.env.DB_HOST)}:${encodeURIComponent(process.env.DB_PORT)}/`;
-url += encodeURIComponent(process.env.DB_DATABASE);
-
 export const mysql = drizzleMySql({
-  url,
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  database: process.env.DB_DATABASE,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  timezone: 'local',
+  getTimestamp: () => new Date(),
   schema,
-  getTimestamp: () => now(),
 });
 
 export default mysql;
