@@ -2,13 +2,13 @@ import { MySqlQuery } from '../@common';
 import type { MySqlSelectedTableColumns, InferColumnsDataTypes } from '@pdg/drizzle-mysql';
 import type { AdminGroupId, AdminMenuId } from '@const';
 
-export type AdminMenuItem = InferColumnsDataTypes<MySqlSelectedTableColumns<typeof db.s.adminMenu>> &
-  PartialPick<
-    InferColumnsDataTypes<MySqlSelectedTableColumns<typeof db.s.adminGroupMenu>>,
-    'read' | 'write' | 'export'
-  > & {
-    items?: AdminMenuItem[];
-  };
+export type AdminMenuItem = InferColumnsDataTypes<MySqlSelectedTableColumns<typeof db.s.adminMenu>> & {
+  read?: boolean | null;
+  write?: boolean | null;
+  export?: boolean | null;
+} & {
+  items?: AdminMenuItem[];
+};
 
 /** 메뉴 목록을 메뉴 트리로 만들기 */
 function makeMenus(list: AdminMenuItem[]) {
