@@ -60,7 +60,7 @@
     "@pdg/crypto": "^1.0.7",
     "@pdg/data": "^1.0.10",
     "@pdg/date-time": "^1.0.6",
-    "@pdg/drizzle-mysql": "^1.0.25",
+    "@pdg/drizzle-mysql": "^1.0.26",
     "@pdg/formatting": "^1.0.9",
     "@pdg/korean": "^1.0.4",
     "@pdg/masking": "^1.0.5",
