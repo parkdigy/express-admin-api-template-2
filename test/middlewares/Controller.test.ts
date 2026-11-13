@@ -9,7 +9,9 @@ jest.mock('mysql2/promise', () => ({
 }));
 
 describe('Controller error response', () => {
-  const query = jest.mocked(mysql.createPool).mock.results[0].value.query as jest.Mock;
+  const poolResult = jest.mocked(mysql.createPool).mock.results[0];
+  if (!poolResult || poolResult.type !== 'return') throw new Error('MySQL pool mock was not initialized');
+  const query = poolResult.value.query as jest.Mock;
   const originalPrintError = globalThis.printError;
 
   beforeEach(() => {
@@ -37,7 +39,9 @@ describe('Controller error response', () => {
       throw internalError;
     });
 
-    await middlewares[1]({} as MyRequest, res as unknown as MyResponse, next);
+    const handler = middlewares[1];
+    if (!handler) throw new Error('Controller handler was not created');
+    await handler({} as MyRequest, res as unknown as MyResponse, next);
 
     expect(globalThis.printError).toHaveBeenCalledTimes(1);
     expect(query).not.toHaveBeenCalled();
@@ -75,7 +79,9 @@ describe('Controller error response', () => {
         });
       });
 
-      await middlewares[1](req, res as unknown as MyResponse, next);
+      const handler = middlewares[1];
+      if (!handler) throw new Error('Controller handler was not created');
+      await handler(req, res as unknown as MyResponse, next);
 
       expect(query).toHaveBeenCalledTimes(2);
       expect(query).toHaveBeenNthCalledWith(1, expect.objectContaining({ sql: 'begin' }), []);

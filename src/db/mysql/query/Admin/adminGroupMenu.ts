@@ -18,9 +18,7 @@ class AdminGroupMenu extends MySqlQuery<'adminGroupMenu'> {
    * 메뉴 권한 등록/수정
    ********************************************************************************************************************/
   async addOrEditMenus({ admin_group_id, menus }: { admin_group_id: AdminGroupId; menus: Menus }) {
-    for (const admin_menu_id of Object.keys(menus)) {
-      const menuRoles = menus[admin_menu_id];
-
+    for (const [admin_menu_id, menuRoles] of Object.entries(menus)) {
       const addValue = this.addValues({
         admin_group_id,
         admin_menu_id,
@@ -30,11 +28,11 @@ class AdminGroupMenu extends MySqlQuery<'adminGroupMenu'> {
       });
       const editValue = this.editValues({});
 
-      for (const role of Object.keys(menuRoles)) {
+      for (const [role, menuRole] of Object.entries(menuRoles)) {
         if (!contains(['read', 'write', 'export'], role)) continue;
 
-        addValue[role] = menuRoles[role].new;
-        editValue[role] = menuRoles[role].new;
+        addValue[role] = menuRole.new;
+        editValue[role] = menuRole.new;
       }
 
       const where = this.eq({ admin_group_id, admin_menu_id });
