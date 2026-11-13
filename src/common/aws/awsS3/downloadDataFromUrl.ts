@@ -56,7 +56,8 @@ const safeLookup: LookupFunction = (hostname, options, callback) => {
         return;
       }
 
-      if (addresses.length === 0 || addresses.some(({ address }) => !isPublicIpAddress(address))) {
+      const firstAddress = addresses[0];
+      if (!firstAddress || addresses.some(({ address }) => !isPublicIpAddress(address))) {
         const lookupError = new Error('사설망 또는 예약된 IP 주소에는 접근할 수 없습니다.') as NodeJS.ErrnoException;
         lookupError.code = 'EACCES';
         callback(lookupError, '', 0);
@@ -66,7 +67,7 @@ const safeLookup: LookupFunction = (hostname, options, callback) => {
       if (options.all) {
         callback(null, addresses);
       } else {
-        callback(null, addresses[0].address, addresses[0].family);
+        callback(null, firstAddress.address, firstAddress.family);
       }
     }
   );

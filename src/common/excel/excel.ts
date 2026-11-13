@@ -175,7 +175,7 @@ const excel = {
     const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let result = 0;
     for (let i = 0, j = column.length - 1; i < column.length; i += 1, j -= 1) {
-      result += Math.pow(base.length, j) * (base.indexOf(column[i]) + 1);
+      result += Math.pow(base.length, j) * (base.indexOf(column.charAt(i)) + 1);
     }
     return result - 1;
   },
@@ -238,8 +238,9 @@ const excel = {
       Omit<ExcelColumnOption<T, Name>, 'title' | 'name' | 'width' | 'align' | 'onValue'>
     >[] = [];
 
-    rawData.forEach((d, dataIndex) => {
-      dataOptions.push({});
+    rawData.forEach((d) => {
+      const rowOptions: (typeof dataOptions)[number] = {};
+      dataOptions.push(rowOptions);
       data.push(
         names.map((name, idx) => {
           if (name === undefined) {
@@ -247,7 +248,7 @@ const excel = {
               info: T
             ) => ExcelColumnOption<T, undefined>;
             if (onOptions) {
-              dataOptions[dataIndex][idx.toString()] = onOptions(d);
+              rowOptions[idx.toString()] = onOptions(d);
             }
 
             const onValue = finalColumns[idx]?.getOptions()?.onValue as (info: T) => ExcelColumnOnValueReturn;
@@ -259,7 +260,7 @@ const excel = {
           } else {
             const onOptions = finalColumns[idx]?.getOptions()?.onCellOptions as (info: T) => ExcelColumnOption<T, Name>;
             if (onOptions) {
-              dataOptions[dataIndex][idx.toString()] = onOptions(d);
+              rowOptions[idx.toString()] = onOptions(d);
             }
 
             const onValue = finalColumns[idx]?.getOptions()?.onValue as (
@@ -380,13 +381,14 @@ const excel = {
     let sumRow = -1;
     if (sumExists && data.length > 0) {
       const refs = ws['!ref']?.split(':');
+      const firstRef = refs?.[0];
+      const lastRef = refs?.[1] ?? firstRef;
 
-      if (refs) {
-        const lastRowIndex =
-          refs.length > 1 ? parseInt(refs[1].replace(/^\D+/g, '')) : parseInt(refs[0].replace(/^\D+/g, ''));
-        const col = refs.length > 1 ? refs[1].replace(/[^A-Za-z]/g, '') : refs[0].replace(/[^A-Za-z]/g, '');
+      if (firstRef && lastRef) {
+        const lastRowIndex = parseInt(lastRef.replace(/^\D+/g, ''));
+        const col = lastRef.replace(/[^A-Za-z]/g, '');
         sumRow = lastRowIndex + 1;
-        ws['!ref'] = `${refs[0]}:${col}${sumRow}`;
+        ws['!ref'] = `${firstRef}:${col}${sumRow}`;
 
         const range = xlsx.utils.decode_range(`A${sumRow}:${col}${sumRow}`);
         for (let c = range.s.c; c <= range.e.c; c += 1) {

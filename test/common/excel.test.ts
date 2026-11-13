@@ -2,6 +2,15 @@ import '../../src/init/global.types';
 import excel from '../../src/common/excel';
 import xlsx from 'sheetjs-style';
 
+function requireValue<T>(value: T | undefined): T {
+  if (value === undefined) throw new Error('Expected test value to be defined');
+  return value;
+}
+
+function firstSheet(workbook: xlsx.WorkBook): xlsx.WorkSheet {
+  return requireValue(workbook.Sheets[requireValue(workbook.SheetNames[0])]);
+}
+
 describe('excel', () => {
   let res: MyResponse;
 
@@ -47,7 +56,7 @@ describe('excel', () => {
 
     const buffer = (res.send as jest.Mock).mock.calls[0][0];
     const workbook = xlsx.read(buffer, { type: 'buffer', cellFormula: true, sheetStubs: true });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(xlsx.utils.sheet_to_json(sheet, { header: 1 }).slice(0, 4)).toEqual([
       ['거래처등록번호', '거래처', '금액'],
@@ -68,7 +77,7 @@ describe('excel', () => {
 
     const buffer = (res.send as jest.Mock).mock.calls[0][0];
     const workbook = xlsx.read(buffer, { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(xlsx.utils.sheet_to_json(sheet, { header: 1 })).toEqual([
       ['Name', 'Age'],
@@ -91,7 +100,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(sheet['!merges']).toEqual([xlsx.utils.decode_range('B1:C1')]);
     expect(xlsx.utils.sheet_to_json(sheet, { header: 1 })).toEqual([
@@ -116,7 +125,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(sheet['!merges']).toEqual(['A1:C1', 'A2:C2', 'D1:D2', 'E1:E2'].map(xlsx.utils.decode_range));
     expect(sheet.E1.v).toBe('그룹');
@@ -131,7 +140,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(sheet['!merges']).toBeUndefined();
     expect(xlsx.utils.sheet_to_json(sheet, { header: 1 })).toEqual([
@@ -159,7 +168,7 @@ describe('excel', () => {
       );
 
       const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const sheet = firstSheet(workbook);
 
       expect(sheet['!merges']).toEqual(
         ['B1:C1', `A1:A${rows}`, `D1:D${rows}`, `E1:E${rows}`].map(xlsx.utils.decode_range)
@@ -187,7 +196,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
     expect(sheet['!merges']).toEqual(['B1:D1', 'B2:C2', 'D2:D3', 'A1:A3', 'E1:E3'].map(xlsx.utils.decode_range));
     expect(sheet.D2.v).toBe('이름');
     expect(sheet.B3.v).toBe('A');
@@ -207,7 +216,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
     expect(sheet['!merges']).toEqual(['A1:C1', 'A2:B3'].map(xlsx.utils.decode_range));
     expect(sheet.C2.v).toBe('이름');
     expect(sheet.C3.v).toBe('상호');
@@ -243,7 +252,7 @@ describe('excel', () => {
       type: 'buffer',
       sheetStubs: true,
     });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
     expect(sheet['!merges']).toEqual(['A1:B1', 'C1:C2', 'B5:C5', 'A6:B6'].map(xlsx.utils.decode_range));
     expect(sheet.C4.f).toBe('SUM(C3:C3)');
     expect(sheet.A5.v).toBe('합계');
@@ -252,7 +261,7 @@ describe('excel', () => {
     expect(sheet.C6.t).toBe('n');
     expect(sheet['!ref']).toBe('A1:C6');
 
-    const styledSheet = write.mock.calls[0][0].Sheets.SheetJS;
+    const styledSheet = requireValue(requireValue(write.mock.calls[0])[0].Sheets.SheetJS);
     expect(styledSheet.A5.s.alignment.horizontal).toBe('center');
     expect(styledSheet.B5.s.alignment.horizontal).toBe('left');
     expect(styledSheet.C6.s.numFmt).toBe('#,##0');
@@ -264,7 +273,7 @@ describe('excel', () => {
       footer: [['합계', 0], [{ value: '조회 결과 없음', colSpan: 2 }]],
     });
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
     expect(xlsx.utils.sheet_to_json(sheet, { header: 1 })).toEqual([
       ['이름', '금액'],
       ['합계', 0],
@@ -297,7 +306,7 @@ describe('excel', () => {
     );
 
     const workbook = xlsx.read((res.send as jest.Mock).mock.calls[0][0], { type: 'buffer' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const sheet = firstSheet(workbook);
 
     expect(sheet['!merges']).toEqual(
       ['A1:B1', 'C1:E1', 'A2:B2', 'C2:D2', 'A3:B3', 'C3:D3'].map(xlsx.utils.decode_range)
