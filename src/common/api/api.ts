@@ -31,16 +31,14 @@ function getReplacedMsg(msg?: ApiMsg): ApiFinalMsg | undefined {
       const replace = msg.replace;
 
       if (replace) {
-        for (const key in replace) {
-          if (Object.prototype.hasOwnProperty.call(replace, key)) {
-            const searchKey = `:${key}`;
-            while (finalTextMsg.indexOf(searchKey) !== -1) {
-              finalTextMsg = finalTextMsg.replace(searchKey, replace[key].toString());
-            }
-            if (finalHtmlMsg) {
-              while (finalHtmlMsg.indexOf(searchKey) !== -1) {
-                finalHtmlMsg = finalHtmlMsg.replace(searchKey, replace[key].toString());
-              }
+        for (const [key, value] of Object.entries(replace)) {
+          const searchKey = `:${key}`;
+          while (finalTextMsg.indexOf(searchKey) !== -1) {
+            finalTextMsg = finalTextMsg.replace(searchKey, value.toString());
+          }
+          if (finalHtmlMsg) {
+            while (finalHtmlMsg.indexOf(searchKey) !== -1) {
+              finalHtmlMsg = finalHtmlMsg.replace(searchKey, value.toString());
             }
           }
         }
