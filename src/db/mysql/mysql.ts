@@ -1,4 +1,4 @@
-import { drizzleMySql } from '@pdg/drizzle-mysql';
+import { drizzleMySql, type MySqlTransactionHandle } from '@pdg/drizzle-mysql';
 import schema from './schema';
 import 'dotenv/config';
 
@@ -13,4 +13,11 @@ export const mysql = drizzleMySql({
   schema,
 });
 
-export default mysql;
+export default {
+  ...mysql,
+  fakeTrans: async (callback: (transaction: MySqlTransactionHandle) => Promise<unknown>) => {
+    await callback({
+      rollback: async () => {},
+    });
+  },
+};
