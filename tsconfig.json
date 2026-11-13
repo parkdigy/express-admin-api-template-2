@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "verbatimModuleSyntax": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,

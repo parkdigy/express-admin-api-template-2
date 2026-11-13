@@ -18,8 +18,8 @@ type ParamsSetPartial<T extends Params> = {
  * PartialParam
  * ******************************************************************************************************************/
 export const PartialParam = <T extends Params, Result = ParamsSetPartial<T>>(params: T): Result => {
-  return Object.keys(params).reduce<Params>((res, key) => {
-    res[key] = { ...params[key], required: false };
+  return Object.entries(params).reduce<Params>((res, [key, option]) => {
+    res[key] = { ...option, required: false };
     return res;
   }, {}) as Result;
 };
@@ -28,8 +28,8 @@ export const PartialParam = <T extends Params, Result = ParamsSetPartial<T>>(par
  * RequiredParam
  * ******************************************************************************************************************/
 export const RequiredParam = <T extends Params, Result = ParamsSetRequired<T>>(params: T): Result => {
-  return Object.keys(params).reduce<Params>((res, key) => {
-    res[key] = { ...params[key], required: true };
+  return Object.entries(params).reduce<Params>((res, [key, option]) => {
+    res[key] = { ...option, required: true };
     return res;
   }, {}) as Result;
 };
@@ -44,7 +44,8 @@ export const PickParam = <T extends Params, Keys extends (keyof T)[], Result = P
   return keys
     .filter((key) => key in params)
     .reduce<Record<string, ParamOption>>((res, key) => {
-      res[key as string] = params[key];
+      const option = params[key];
+      if (option) res[key as string] = option;
       return res;
     }, {}) as Result;
 };
@@ -63,7 +64,8 @@ export const PartialPickParam = <
   return keys
     .filter((key) => key in params)
     .reduce<Record<string, ParamOption>>((res, key) => {
-      res[key as string] = { ...params[key], required: false };
+      const option = params[key];
+      if (option) res[key as string] = { ...option, required: false };
       return res;
     }, {}) as Result;
 };
@@ -82,7 +84,8 @@ export const RequiredPickParam = <
   return keys
     .filter((key) => key in params)
     .reduce<Record<string, ParamOption>>((res, key) => {
-      res[key as string] = { ...params[key], required: true };
+      const option = params[key];
+      if (option) res[key as string] = { ...option, required: true };
       return res;
     }, {}) as Result;
 };
@@ -112,8 +115,8 @@ export const PartialOmitParam = <
   params: T,
   ...keys: Keys
 ): Result => {
-  const newParams = Object.keys(params).reduce<Params>((res, key) => {
-    res[key] = { ...params[key], required: false };
+  const newParams = Object.entries(params).reduce<Params>((res, [key, option]) => {
+    res[key] = { ...option, required: false };
     return res;
   }, {});
 
@@ -134,8 +137,8 @@ export const RequiredOmitParam = <
   params: T,
   ...keys: Keys
 ): Result => {
-  const newParams = Object.keys(params).reduce<Params>((res, key) => {
-    res[key] = { ...params[key], required: true };
+  const newParams = Object.entries(params).reduce<Params>((res, [key, option]) => {
+    res[key] = { ...option, required: true };
     return res;
   }, {});
 

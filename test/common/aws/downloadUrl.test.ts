@@ -102,7 +102,9 @@ describe('S3 URL download security', () => {
       const get = jest.spyOn(axios, 'get').mockResolvedValueOnce({ data });
 
       await downloadDataFromUrl('https://example.com/image.jpg');
-      const requestConfig = get.mock.calls[0][1];
+      const request = get.mock.calls[0];
+      if (!request) throw new Error('Expected axios.get to be called');
+      const requestConfig = request[1];
 
       expect(() => requestConfig?.beforeRedirect?.({ protocol: 'file:' }, {} as never, {} as never)).toThrow(
         'HTTP 또는 HTTPS 리다이렉트만 사용할 수 있습니다.'

@@ -15,8 +15,7 @@ declare global {
 if (!String.prototype.replaceBatch) {
   String.prototype.replaceBatch = function (replace) {
     let text = `${this}`;
-    Object.keys(replace).forEach((key) => {
-      const getValue = replace[key];
+    Object.entries(replace).forEach(([key, getValue]) => {
       if (text.includes(key)) {
         text = text.replaceAll(key, getValue());
       }
