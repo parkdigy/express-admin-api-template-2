@@ -14,8 +14,7 @@ export default function (req: MyRequest, res: MyResponse, next: NextFunction) {
         file.originalname = iconv.decode(buffer, 'utf8');
       }
     } else {
-      for (const key in req.files) {
-        const fileArray = req.files[key];
+      for (const fileArray of Object.values(req.files)) {
         for (const file of fileArray) {
           const buffer = Buffer.from(file.originalname, 'latin1');
           file.originalname = iconv.decode(buffer, 'utf8');

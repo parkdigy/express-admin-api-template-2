@@ -17,7 +17,7 @@ export default function (req: MyRequest, res: MyResponse, next: NextFunction) {
   let remoteIpAddress = forwarded || req.socket.remoteAddress;
   if (notEmpty(remoteIpAddress)) {
     if (remoteIpAddress.includes(',')) {
-      remoteIpAddress = remoteIpAddress.split(',')[0];
+      remoteIpAddress = remoteIpAddress.slice(0, remoteIpAddress.indexOf(','));
     }
     remoteIpAddress = remoteIpAddress.replace(/::ffff:/g, '');
     if (remoteIpAddress === '::1') {
