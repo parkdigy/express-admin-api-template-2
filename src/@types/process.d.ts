@@ -40,8 +40,6 @@ declare namespace NodeJS {
     // JWT 토큰 만료 기간 (일) (-1 = 제한없음)
     AUTH_JWT_TOKEN_EXPIRES_DAYS: string;
 
-    // 데이터베이스 (mysql, mssql, sqlite, postgresql, ...)
-    DB_CONNECTION: string;
     // 데이터베이스 호스트
     DB_HOST: string;
     // 데이터베이스 포트
