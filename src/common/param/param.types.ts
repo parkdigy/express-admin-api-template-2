@@ -72,7 +72,9 @@ export type ParamOptionDataType<
   ValidValue = T extends { validValues: infer V } ? (V extends Readonly<Arr> ? V[number] : never) : never,
   NullType = T extends { nullable: infer Nullable } ? (Nullable extends true ? null : never) : never,
   DefaultValue = T extends { defaultValue: infer V } ? V : undefined,
-  IsDefaultValue = DefaultValue extends ParamAllDataType | ValidValue | (NullType extends null ? null : never)
+  IsDefaultValue = [DefaultValue] extends [
+    ParamAllDataType | ValidValue | object | (NullType extends null ? null : never),
+  ]
     ? true
     : false,
   UndefinedType = Required extends true ? never : IsDefaultValue extends true ? never : undefined,
@@ -101,7 +103,7 @@ export type ParamOptionDataType<
                 : ParamTypeDataType<Type>
               : ParamTypeDataType<Type>
     : never,
-  FinalResult = Result | UndefinedType | NullType,
+  FinalResult = Result | UndefinedType | ([DefaultValue] extends [NonNullable<DefaultValue>] ? never : NullType),
 > = FinalResult;
 
 export type Param<
