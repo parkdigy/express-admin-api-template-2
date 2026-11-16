@@ -28,5 +28,5 @@ export const user = new User();
 
 export type TUser = typeof user.t.$inferSelect;
 
-export type User$AddValues = ReturnType<typeof user.addValues>;
-export type User$EditValues = ReturnType<typeof user.editValues>;
+export type TUser$AddData = ReturnType<typeof user.addData>;
+export type TUser$EditData = ReturnType<typeof user.editData>;
