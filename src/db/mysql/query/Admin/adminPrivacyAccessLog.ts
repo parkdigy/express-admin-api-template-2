@@ -46,5 +46,5 @@ export const adminPrivacyAccessLog = new AdminPrivacyAccessLog();
 
 export type TAdminPrivacyAccessLog = typeof adminPrivacyAccessLog.t.$inferSelect;
 
-export type AdminPrivacyAccessLog$AddValues = ReturnType<typeof adminPrivacyAccessLog.addValues>;
-export type AdminPrivacyAccessLog$EditValues = ReturnType<typeof adminPrivacyAccessLog.editValues>;
+export type TAdminPrivacyAccessLog$AddData = ReturnType<typeof adminPrivacyAccessLog.addData>;
+export type TAdminPrivacyAccessLog$EditData = ReturnType<typeof adminPrivacyAccessLog.editData>;

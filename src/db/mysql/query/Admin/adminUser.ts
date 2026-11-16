@@ -178,5 +178,5 @@ export const adminUser = new AdminUser();
 
 export type TAdminUser = typeof adminUser.t.$inferSelect;
 
-export type AdminUser$AddValues = ReturnType<typeof adminUser.addValues>;
-export type AdminUser$EditValues = ReturnType<typeof adminUser.editValues>;
+export type TAdminUser$AddData = ReturnType<typeof adminUser.addData>;
+export type TAdminUser$EditData = ReturnType<typeof adminUser.editData>;

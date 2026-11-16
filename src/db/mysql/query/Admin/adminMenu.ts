@@ -137,5 +137,5 @@ export const adminMenu = new AdminMenu();
 
 export type TAdminMenu = typeof adminMenu.t.$inferSelect;
 
-export type AdminMenu$AddValues = ReturnType<typeof adminMenu.addValues>;
-export type AdminMenu$EditValues = ReturnType<typeof adminMenu.editValues>;
+export type TAdminMenu$AddData = ReturnType<typeof adminMenu.addData>;
+export type TAdminMenu$EditData = ReturnType<typeof adminMenu.editData>;

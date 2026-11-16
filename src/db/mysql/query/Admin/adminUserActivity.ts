@@ -66,5 +66,5 @@ export const adminUserActivity = new AdminUserActivity();
 
 export type TAdminUserActivity = typeof adminUserActivity.t.$inferSelect;
 
-export type AdminUserActivity$AddValues = ReturnType<typeof adminUserActivity.addValues>;
-export type AdminUserActivity$EditValues = ReturnType<typeof adminUserActivity.editValues>;
+export type TAdminUserActivity$AddData = ReturnType<typeof adminUserActivity.addData>;
+export type TAdminUserActivity$EditData = ReturnType<typeof adminUserActivity.editData>;

@@ -19,14 +19,14 @@ class AdminGroupMenu extends MySqlQuery<'adminGroupMenu'> {
    ********************************************************************************************************************/
   async addOrEditMenus({ admin_group_id, menus }: { admin_group_id: AdminGroupId; menus: Menus }) {
     for (const [admin_menu_id, menuRoles] of Object.entries(menus)) {
-      const addValue = this.addValues({
+      const addValue = this.addData({
         admin_group_id,
         admin_menu_id,
         read: false,
         write: false,
         export: false,
       });
-      const editValue = this.editValues({});
+      const editValue = this.editData({});
 
       for (const [role, menuRole] of Object.entries(menuRoles)) {
         if (!contains(['read', 'write', 'export'], role)) continue;
@@ -50,5 +50,5 @@ export const adminGroupMenu = new AdminGroupMenu();
 
 export type TAdminGroupMenu = typeof adminGroupMenu.t.$inferSelect;
 
-export type AdminGroupMenu$AddValues = ReturnType<typeof adminGroupMenu.addValues>;
-export type AdminGroupMenu$EditValues = ReturnType<typeof adminGroupMenu.editValues>;
+export type TAdminGroupMenu$AddData = ReturnType<typeof adminGroupMenu.addData>;
+export type TAdminGroupMenu$EditData = ReturnType<typeof adminGroupMenu.editData>;

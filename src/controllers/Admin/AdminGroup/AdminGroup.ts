@@ -119,7 +119,7 @@ export default {
     // Begin Transaction
     await db.trans(async () => {
       // 그룹 정보 수정
-      const updateData = db.q.adminGroup.editValues({});
+      const updateData = db.q.adminGroup.editData({});
 
       if (groupInfo.name !== name) {
         if (admin_group_id === SUPER_ADMIN_GROUP_ID)

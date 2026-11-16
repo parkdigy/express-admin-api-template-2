@@ -70,5 +70,5 @@ export const adminUserLoginLog = new AdminUserLoginLog();
 
 export type TAdminUserLoginLog = typeof adminUserLoginLog.t.$inferSelect;
 
-export type AdminUserLoginLog$AddValues = ReturnType<typeof adminUserLoginLog.addValues>;
-export type AdminUserLoginLog$EditValues = ReturnType<typeof adminUserLoginLog.editValues>;
+export type TAdminUserLoginLog$AddData = ReturnType<typeof adminUserLoginLog.addData>;
+export type TAdminUserLoginLog$EditData = ReturnType<typeof adminUserLoginLog.editData>;

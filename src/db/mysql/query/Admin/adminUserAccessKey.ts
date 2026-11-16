@@ -25,5 +25,5 @@ export const adminUserAccessKey = new AdminUserAccessKey();
 
 export type TAdminUserAccessKey = typeof adminUserAccessKey.t.$inferSelect;
 
-export type AdminUserAccessKey$AddValues = ReturnType<typeof adminUserAccessKey.addValues>;
-export type AdminUserAccessKey$EditValues = ReturnType<typeof adminUserAccessKey.editValues>;
+export type TAdminUserAccessKey$AddData = ReturnType<typeof adminUserAccessKey.addData>;
+export type TAdminUserAccessKey$EditData = ReturnType<typeof adminUserAccessKey.editData>;

@@ -33,5 +33,5 @@ export const adminGroup = new AdminGroup();
 
 export type TAdminGroup = typeof adminGroup.t.$inferSelect;
 
-export type AdminGroup$AddValues = ReturnType<typeof adminGroup.addValues>;
-export type AdminGroup$EditValues = ReturnType<typeof adminGroup.editValues>;
+export type TAdminGroup$AddData = ReturnType<typeof adminGroup.addData>;
+export type TAdminGroup$EditData = ReturnType<typeof adminGroup.editData>;
