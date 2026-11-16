@@ -35,7 +35,6 @@ export default function (
       try {
         await controller(req as any, res);
       } catch (err) {
-        ll(err);
         await handleException(err as Error);
       }
 
