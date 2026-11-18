@@ -50,7 +50,7 @@ class AdminMenu extends MySqlQuery<'adminMenu'> {
       'is_all_user_menu',
       'icon',
       'depth',
-    ]).orderBy(db.asc(this.t.depth), db.asc(this.t.seq));
+    ]).orderBy(db.asc(this.t.depth, this.t.seq));
   }
 
   /********************************************************************************************************************
@@ -80,7 +80,7 @@ class AdminMenu extends MySqlQuery<'adminMenu'> {
       } else {
         return this.select(am, db.columns([am], [agm, 'read', 'write', 'export']))
           .leftJoin(agm, db.eq(agm, { admin_menu_id: am.id, admin_group_id, read: true }))
-          .where(db.eq(am, { is_super_admin_menu: false }));
+          .where(db.eq(am.is_super_admin_menu, false));
       }
     })();
 

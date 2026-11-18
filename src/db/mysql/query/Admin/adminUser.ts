@@ -74,10 +74,18 @@ class AdminUser extends MySqlQuery<'adminUser'> {
     const agu = db.a.adminGroupUser();
     const ag = db.a.adminGroup();
 
-    return this.select(au, [db.columns([au, 'id', 'name', 'email'], [agu, 'admin_group_id']), { group_name: ag.name }])
+    return this.select(au, [
+      db.columns([au, 'id', 'name', 'email'], [agu, 'admin_group_id']),
+      db.columns(ag, 'name as group_name'),
+    ])
       .leftJoin(agu, db.eq(agu.admin_user_id, au.id))
       .leftJoin(ag, db.eq(ag.id, agu.admin_group_id))
-      .where(db.and(au, { gt: { id: 100 }, eq: { is_lock: options?.is_lock } }))
+      .where(
+        db.and(au, {
+          gt: { id: 100 },
+          eq: { is_lock: options?.is_lock },
+        })
+      )
       .orderBy(db.asc(au.email));
   }
 
@@ -92,9 +100,9 @@ class AdminUser extends MySqlQuery<'adminUser'> {
     const [info] = await this.select(au, [
       db.columns(
         [au, 'id', 'name', 'email', 'tel', 'must_password_change', 'is_lock', 'create_date'],
-        [agu, 'admin_group_id']
+        [agu, 'admin_group_id'],
+        [ag, 'name as admin_group_name']
       ),
-      { admin_group_name: db.sql`${ag.name}`.as('admin_group_name') },
     ])
       .leftJoin(agu, db.eq(agu.admin_user_id, au.id))
       .leftJoin(ag, db.eq(ag.id, agu.admin_group_id))
@@ -131,14 +139,14 @@ class AdminUser extends MySqlQuery<'adminUser'> {
     const [info] = await this.select(au, [
       db.columns(au, 'id', 'email', 'must_password_change'),
       {
-        admin_group_id: db.sqlNumber(db.sql`coalesce(${agu.admin_group_id}, 0)`),
-        is_super_admin: db.sqlBoolean(db.sql`coalesce(${agu.admin_group_id} = 1, false)`),
+        admin_group_id: db.coalesceNumber(agu.admin_group_id, 0),
+        is_super_admin: db.coalesceBoolean(db.sql`${agu.admin_group_id} = 1`, false),
         is_privacy_access: db.sqlBoolean(db.sql`
-        case
-          when ${agu.admin_group_id} = 1 then true
-          else coalesce(${ag.is_privacy_access}, false)
-        end
-      `),
+          case
+            when ${agu.admin_group_id} = 1 then true
+            else ${db.coalesce(ag.is_privacy_access, false)}
+          end
+        `),
       },
     ])
       .leftJoin(agu, db.eq(agu.admin_user_id, au.id))

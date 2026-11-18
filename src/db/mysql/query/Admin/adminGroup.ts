@@ -13,18 +13,22 @@ class AdminGroup extends MySqlQuery<'adminGroup'> {
    * ******************************************************************************************************************/
   list(options?: { is_lock?: boolean; user_count?: boolean }) {
     const ag = db.a.adminGroup();
-    const agu = db.a.adminGroupUser();
 
     return this.select(ag, [
       db.columns(ag, 'id', 'name', 'is_lock'),
       options?.user_count && {
         user_count: db.q.adminGroupUser
-          .select(agu, { count: db.count().as('count') })
-          .where(db.eq(agu.admin_group_id, ag.id))
-          .as('user_count'),
+          .select({
+            count: db.count(),
+          })
+          .where((q) =>
+            q.eq({
+              admin_group_id: ag.id,
+            })
+          ),
       },
     ])
-      .where(db.eq(ag, { is_lock: options?.is_lock }))
+      .where(db.eq(ag.is_lock, options?.is_lock))
       .orderBy(db.asc(ag.is_lock), db.asc(ag.id));
   }
 }

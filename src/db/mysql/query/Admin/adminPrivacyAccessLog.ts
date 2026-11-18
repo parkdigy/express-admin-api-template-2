@@ -28,7 +28,7 @@ class AdminPrivacyAccessLog extends MySqlQuery<'adminPrivacyAccessLog'> {
 
     return this.select(al, [
       db.columns(al, 'id', 'admin_user_id', 'type', 'reason', 'parent_id', 'create_date'),
-      { admin_user_name: au.name },
+      db.columns(au, 'name as admin_user_name'),
     ])
       .innerJoin(au, db.eq(au.id, al.admin_user_id))
       .where(
