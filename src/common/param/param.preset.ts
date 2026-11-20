@@ -167,8 +167,13 @@ export const Param_Integer_Nullable_Required = <const Option extends LocalRequir
  * ******************************************************************************************************************/
 export const Param_Number = <const Option extends LocalParamOption<'number'> = {}>(option?: Option) =>
   MakeParam('number', option);
+export const Param_Number_Nullable = <const Option extends LocalRequiredParamOption<'number'> = {}>(option?: Option) =>
+  MakeParam('number', option, { nullable: true });
 export const Param_Number_Required = <const Option extends LocalRequiredParamOption<'number'> = {}>(option?: Option) =>
   MakeParam('number', option, { required: true });
+export const Param_Number_Nullable_Required = <const Option extends LocalRequiredParamOption<'number'> = {}>(
+  option?: Option
+) => MakeParam('number', option, { nullable: true, required: true });
 
 /********************************************************************************************************************
  * Boolean
